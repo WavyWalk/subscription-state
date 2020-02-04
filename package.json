@@ -1,0 +1,22 @@
+{
+  "name": "subscription-state",
+  "version": "1.0.0",
+  "repository": "WavyWalk/subscription-state",
+  "description": "React state management",
+  "private": false,
+  "scripts": {
+    "build": "webpack",
+    "buildTsc": "tsc"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "typescript": "^3.7.5",
+    "@types/react": "^16.9.19"
+  }
+}
