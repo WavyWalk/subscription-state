@@ -121,3 +121,6 @@ const myComp = () => {
 ```
 
 That's basically it.
+
+# licence
+MIT
