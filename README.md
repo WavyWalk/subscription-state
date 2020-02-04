@@ -43,7 +43,7 @@ do quite a work. Let's say we use redux for that, and for a single field it begi
 to keep your state immutable and etc.
 
 The important thing that with traditional approach, youll spend a lot of time of forcing "functional'ness", e.g. to keep things immutable.
-That on it's own introduces quite a complexity and in turn will always be "unpure"because of the single - JS is not a functional language! It just does not support immutability 
+That on it's own introduces quite a complexity and in turn will always be "unpure" because of the single fact - JS is not a functional language! It just does not support immutability 
 as a language level feature (unlike the real functional languages).
 
 So instead of solving business problem you have to rape javascript and prove him that he's functional with all the `{...state}` and friends in your hundredlinelong reducers.
@@ -120,7 +120,57 @@ const myComp = () => {
 }
 ```
 
-That's basically it.
+async example:
+
+```typescript jsx
+class MyState extends SubscriptionState {
+
+    static instance = MyState()
+    
+    users?: User[]    
+
+    @updatesSubscribers({async: true}) // will update after promise resovled if you supply {async: true}
+    async loadUsers() {
+        this.users = await User.fetchUsers()
+    }
+    //alternatively
+    loadUsers = async () => {
+        this.users = await User.fetchUsers()
+        this.updateSubscribedComponents()
+    }
+}
+
+const Users = () => {
+    
+    const myState = MyState.instance.use()
+
+    useEffect(()=>{
+        myState.loadUsers()
+    }, [])
+    
+    if (!myState.users) {
+        return <p>loading</p>
+    }
+    return <div>
+        {myState.users.map((user)=>{
+            <p key={user.id}>{user.name}</p>
+        })}       
+    </div>
+}
+
+const UserAddressList = () => {
+    const myState = MyState.instance.use()
+
+    return <div>
+        {myState.users?.map((user)=>{
+            <p key={user.id}>{user.address}</p>
+        })}       
+    </div>
+}
+```
+in above example, after users loaded it will update both `Users` and `UserAddressList`
+
+# That's basically it.
 
 # licence
 MIT
