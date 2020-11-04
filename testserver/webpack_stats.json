@@ -1,0 +1,14 @@
+{
+  "assetsByChunkName": {
+    "css/index": [
+      "css/index.css",
+      "css/index.js",
+      "css/index.css.map",
+      "css/index.js.map"
+    ],
+    "js/index": [
+      "js/index.js",
+      "js/index.js.map"
+    ]
+  }
+}
